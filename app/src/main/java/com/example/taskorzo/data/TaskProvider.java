@@ -109,7 +109,33 @@ public class TaskProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
-        
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case TASKS:
+                return updateTask(uri, values, selection, selectionArgs);
+            case TASK_ID:
+                selection = TaskContract.COLUMN_ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                return updateTask(uri, values, selection, selectionArgs);
+
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+
+    }
+
+    private int updateTask (Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        if (values.containsKey(TaskContract.COLUMN_TITLE)) {
+            String name = values.getAsString(TaskContract.COLUMN_TITLE);
+            if (name == null) {
+                throw new IllegalArgumentException("Task requires a title");
+            }
+            if (values.size() == 0) {
+                return 0;
+            }
+        }
+
+        SQLiteDatabase database = taskDbHelper.getWritableDatabase();
+        return database.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
     }
 }
