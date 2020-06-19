@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Taskorzo</string>
+    <string name="tasks">Daily Tasks</string>
+    <string name="skills">Build Skills</string>
+    <string name="habits">Make Habits</string>
+    <string name="image_for_ui">Image for UI</string>
+</resources>

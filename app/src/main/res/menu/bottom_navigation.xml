@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/nav_task" android:icon="@drawable/task" android:title="@string/tasks"
+        app:cnb_iconColor="#3000BC" app:cnb_textColor="#3100BC" app:cnb_backgroundColor="#335C3CB9"
+        app:cnb_unselectedColor="#000000" app:cnb_radius="2dp"
+        android:titleCondensed="Tasks"
+        />
+
+    <item android:id="@+id/nav_habit" android:icon="@drawable/habit" android:title="@string/habits"
+        app:cnb_iconColor="#1B9001" app:cnb_textColor="#1B9001" app:cnb_backgroundColor="#3349AE50"
+        app:cnb_unselectedColor="#000000" app:cnb_radius="2dp"/>
+
+    <item android:id="@+id/nav_skill" android:icon="@drawable/skill" android:title="@string/skills"
+        app:cnb_iconColor="#D79A01" app:cnb_textColor="#D79A01" app:cnb_backgroundColor="#33E3A916"
+        app:cnb_unselectedColor="#000000" app:cnb_radius="2dp"/>
+
+</menu>
