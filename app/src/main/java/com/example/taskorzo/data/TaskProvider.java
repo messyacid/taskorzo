@@ -1,6 +1,7 @@
 package com.example.taskorzo.data;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -20,6 +21,8 @@ public class TaskProvider extends ContentProvider {
     private TaskDbHelper taskDbHelper;
     private static final int TASKS = 100;
     private static final int TASK_ID = 101;
+    public static final String CONTENT_LIST_TYPE  = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + TaskContract.CONTENT_AUTHORITY + "/" + TaskContract.PATH_TASKS;
+    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + TaskContract.CONTENT_AUTHORITY + "/" + TaskContract.PATH_TASKS;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -71,7 +74,15 @@ public class TaskProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case TASKS:
+                return CONTENT_LIST_TYPE;
+            case TASK_ID:
+                return CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri +" with match " + match);
+        }
     }
 
     @Nullable
@@ -104,7 +115,21 @@ public class TaskProvider extends ContentProvider {
     }
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase database = taskDbHelper.getWritableDatabase();
+
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case TASKS:
+                return database.delete(TaskContract.TABLE_NAME, selection, selectionArgs);
+
+            case TASK_ID:
+                selection = TaskContract.COLUMN_ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+
+                return database.delete(TaskContract.TABLE_NAME, selection, selectionArgs);
+            default:
+                throw  new IllegalArgumentException("Deleting is not supported for " + uri);
+        }
     }
 
     @Override
@@ -134,7 +159,6 @@ public class TaskProvider extends ContentProvider {
                 return 0;
             }
         }
-
         SQLiteDatabase database = taskDbHelper.getWritableDatabase();
         return database.update(TaskContract.TABLE_NAME, values, selection, selectionArgs);
     }
