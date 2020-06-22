@@ -1,6 +1,7 @@
 package com.example.taskorzo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -33,9 +34,6 @@ public class AddTask extends AppCompatActivity {
         editDescription = findViewById(R.id.editTaskDesc);
 
 
-
-
-
         Button btnDone = findViewById(R.id.btnDone);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +60,8 @@ public class AddTask extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(TaskContract.COLUMN_TITLE, taskTitle);
         values.put(TaskContract.COLUMN_DESC, taskDescription);
-
         Uri newUri = getContentResolver().insert(TaskContract.CONTENT_URI, values);
+
 
     }
 
