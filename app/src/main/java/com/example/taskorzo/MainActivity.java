@@ -1,26 +1,18 @@
 package com.example.taskorzo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddTaskDialog.AddTaskDialogListner {
     FragmentManager fragmentManager;
     ChipNavigationBar bottomNavigationView;
-    FloatingActionButton floatingActionButton;
     private static final String TAG = MainActivity.class.getSimpleName();
 
 
@@ -36,14 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        floatingActionButton = findViewById(R.id.addTaskButton);
 
         if (savedInstanceState == null) {
             bottomNavigationView.setItemSelected(R.id.nav_task, true);
             fragmentManager = getSupportFragmentManager();
             TaskFragment taskFragment = new TaskFragment();
             fragmentManager.beginTransaction().replace(R.id.main_frame, taskFragment).commit();
-            floatingActionButton.show();
         }
 
 
@@ -55,15 +45,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (id) {
                     case R.id.nav_task:
                         fragment = new TaskFragment();
-                        floatingActionButton.show();
                         break;
                     case R.id.nav_habit:
                         fragment = new HabitFragment();
-                        floatingActionButton.hide();
                         break;
                     case R.id.nav_skill:
                         fragment = new SkillFragment();
-                        floatingActionButton.hide();
                         break;
 
                 }
@@ -79,16 +66,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddTask.class);
-                startActivity(intent);
-            }
-        });
 
 
 
     }
 
+    @Override
+    public void applyTexts(String title, String description) {
+        Log.i("DataMainActivity", title + " " + description);
+    }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/task_background"
+   >
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="37dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/form_background"
+        android:orientation="vertical"
+        android:padding="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="9dp"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="Task Title"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="31"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/editTaskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="9dp"
+                android:background="#5D795CC5"
+                android:importantForAutofill="no"
+                android:maxLength="31"
+                android:textColor="@color/black"
+                android:textColorHighlight="#AA01FF" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="9dp"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="Task Description"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+        <EditText
+            android:id="@+id/editTaskDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="16dp"
+            android:background="#5D795CC5"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:lines="7"
+            android:minLines="5"
+            android:textColor="@color/black"
+            android:textColorHint="#4F3F3F" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
