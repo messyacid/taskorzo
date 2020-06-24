@@ -18,7 +18,7 @@
 
 <!--    Task Fragment Code-->
     <color name="task_background">#5B37B7</color>
-
+    <color name="task_theme_transparent">#335B37B7</color>
 
 
 </resources>

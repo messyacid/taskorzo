@@ -1,16 +1,11 @@
 package com.example.taskorzo;
-
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +19,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class TaskFragment extends Fragment implements AddTaskDialog.AddTaskDialogListner{
+public class TaskFragment extends Fragment implements AddTaskDialogFragment.OnTaskSelected {
 Cursor cursor;
 RecyclerView recylerAllTasks;
 ArrayList<String> recycleTitle, recycleDescription;
 TaskDbHelper dbHelper;
 recycleAdapter recycleAdapter;
 FloatingActionButton floatingActionButton;
+String taskTitle, taskDescription;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,25 +71,22 @@ FloatingActionButton floatingActionButton;
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showAddTaskDialog(); 
+                AddTaskDialogFragment addTaskDialogFragment = new AddTaskDialogFragment();
+                addTaskDialogFragment.setTargetFragment(TaskFragment.this, 1);
+                addTaskDialogFragment.show(getFragmentManager(), "New Task Dialog");
             }
         });
-          return taskView;
-    }
 
-    private void showAddTaskDialog() {
-        AddTaskDialog addTaskDialog = new AddTaskDialog();
-        addTaskDialog.show(getFragmentManager(), "Add task Dialog");
+
+     return taskView;
     }
 
 
     @Override
-    public void applyTexts(String title, String description) {
-        ContentValues values = new ContentValues();
-        Log.i("DATA_FRAG", title + " " + description);
-        values.put(TaskContract.COLUMN_TITLE, title);
-        values.put(TaskContract.COLUMN_DESC, description);
-        Uri newUri = getActivity().getContentResolver().insert(TaskContract.CONTENT_URI, values);
-        recycleAdapter.notifyDataSetChanged();
+    public void sendTask(String[] newTask) {
+        taskTitle = newTask[0];
+        taskDescription = newTask[1];
+
+        Log.i("DIDIT", taskTitle + " " + taskDescription);
     }
 }

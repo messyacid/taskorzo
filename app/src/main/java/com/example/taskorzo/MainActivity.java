@@ -10,11 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-public class MainActivity extends AppCompatActivity implements AddTaskDialog.AddTaskDialogListner {
+public class MainActivity extends AppCompatActivity  {
     FragmentManager fragmentManager;
     ChipNavigationBar bottomNavigationView;
     private static final String TAG = MainActivity.class.getSimpleName();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +23,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialog.Add
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-
-
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         if (savedInstanceState == null) {
@@ -35,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialog.Add
             TaskFragment taskFragment = new TaskFragment();
             fragmentManager.beginTransaction().replace(R.id.main_frame, taskFragment).commit();
         }
-
 
         bottomNavigationView.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
@@ -52,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialog.Add
                     case R.id.nav_skill:
                         fragment = new SkillFragment();
                         break;
-
                 }
 
                 if (fragment != null) {
@@ -66,13 +60,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialog.Add
         });
 
 
-
-
-
     }
 
-    @Override
-    public void applyTexts(String title, String description) {
-        Log.i("DataMainActivity", title + " " + description);
-    }
 }
