@@ -1,5 +1,7 @@
 package com.example.taskorzo;
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,11 +37,15 @@ String taskTitle, taskDescription;
 
         floatingActionButton = taskView.findViewById(R.id.addTaskButton);
         recylerAllTasks = (RecyclerView) taskView.findViewById(R.id.recyclerAllTasks);
+
         recycleTitle = new ArrayList<String>();
         recycleDescription = new ArrayList<String>();
+        recycleAdapter = new recycleAdapter(getContext(), recycleTitle, recycleDescription);
 
-        //database associated code here
+        recylerAllTasks.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recylerAllTasks.setAdapter(recycleAdapter);
         dbHelper = new TaskDbHelper(getContext());
+
         cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, null, null, null);
 
         try {
@@ -55,18 +61,6 @@ String taskTitle, taskDescription;
             cursor.close();
         }
 
-        recycleAdapter = new recycleAdapter(getContext(), recycleTitle, recycleDescription);
-
-        //Adding recylerView and Array populating code here
-        recylerAllTasks.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recycleTitle = new ArrayList<>();
-        recycleDescription = new ArrayList<>();
-
-        //Populating RecyclerView with Database TODO 1-2
-        recylerAllTasks.setAdapter(recycleAdapter);
-
-
-
         //FAB Button
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +70,28 @@ String taskTitle, taskDescription;
                 addTaskDialogFragment.show(getFragmentManager(), "New Task Dialog");
             }
         });
-
-
      return taskView;
     }
-
 
     @Override
     public void sendTask(String[] newTask) {
         taskTitle = newTask[0];
         taskDescription = newTask[1];
 
-        Log.i("DIDIT", taskTitle + " " + taskDescription);
+        if(!taskTitle.isEmpty()) {
+
+            recycleTitle.add(taskTitle);
+            recycleDescription.add(taskDescription);
+
+            recycleAdapter.notifyDataSetChanged();
+
+            ContentValues values = new ContentValues();
+            values.put(TaskContract.COLUMN_TITLE, taskTitle);
+            values.put(TaskContract.COLUMN_DESC, taskDescription);
+
+            Uri newuri = getActivity().getContentResolver().insert(TaskContract.CONTENT_URI, values);
+        }
     }
+
+
 }

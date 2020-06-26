@@ -19,10 +19,10 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
 
     ArrayList taskTitle,taskDescription;
 
-    recycleAdapter(Context context, ArrayList taskTitle, ArrayList taskDescription) {
-        this.context = context;
-        this.taskTitle = taskTitle;
-        this.taskDescription = taskDescription;
+    recycleAdapter(Context mcontext, ArrayList mtaskTitle, ArrayList mtaskDescription) {
+        context = mcontext;
+        taskTitle = mtaskTitle;
+        taskDescription = mtaskDescription;
     }
 
     @NonNull
