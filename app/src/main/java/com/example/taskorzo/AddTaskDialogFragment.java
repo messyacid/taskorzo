@@ -35,7 +35,6 @@ public class AddTaskDialogFragment extends DialogFragment {
        addButton = view.findViewById(R.id.buttonAddTask);
        cancelButton = view.findViewById(R.id.buttonCancelTask);
 
-
        addButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {

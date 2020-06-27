@@ -16,6 +16,8 @@
     <color name="btn_cancel">#DC3125</color>
     <color name="edit_text_bgcolor">#E2AFFD</color>
 
+    <color name="generic_background_color">#F4F4F4</color>
+
 <!--    Task Fragment Code-->
     <color name="task_background">#5B37B7</color>
     <color name="task_theme_transparent">#335B37B7</color>

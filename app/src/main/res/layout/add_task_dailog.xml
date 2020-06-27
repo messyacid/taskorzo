@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    android:minHeight="400dp"
+    android:minHeight="360dp"
     android:minWidth="320dp"
-    android:background="@color/colorAccent">
+    android:background="@color/generic_background_color">
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -18,18 +18,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Enter task title here"
-        android:inputType="textPersonName"
-        android:padding="16dp"
-        android:textColor="@color/nav_task"
-        android:textColorHint="@color/colorPrimaryDark"
+
+        app:met_baseColor="#000000"
+        android:textCursorDrawable="@null"
+        app:met_textColorHint="#757575"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="Title"
+        app:met_underlineColor="@color/nav_task"
+        android:inputType="text"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+    </com.rengwuxian.materialedittext.MaterialEditText>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editDescriptionText"
@@ -37,13 +42,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTitleText"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Enter task description here"
-        android:inputType="textPersonName"
-        android:padding="16dp"
+
+        app:met_baseColor="#000000"
+        app:met_textColorHint="#757575"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="Description"
+        app:met_underlineColor="@color/nav_task"
+        android:textCursorDrawable="@null"
+
+        android:inputType="text"
+        android:padding="8dp"
         android:textColor="@color/nav_task"
         android:textColorHint="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +66,8 @@
         android:id="@+id/buttonContainerAddTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDescriptionText">
@@ -64,7 +76,7 @@
             android:id="@+id/buttonAddTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,18 +86,17 @@
             fancy:fb_focusColor="@color/btn_done"
             fancy:fb_fontIconResource="&#xf05d;"
             fancy:fb_iconPosition="left"
-            fancy:fb_radius="30dp"
+            fancy:fb_radius="14dp"
             fancy:fb_text="Add Task"
-            fancy:fb_textSize="14sp"
-            fancy:fb_textColor="#FFFFFF" />
+            fancy:fb_textColor="#FFFFFF"
+            fancy:fb_textSize="16sp" />
 
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/buttonCancelTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            fancy:fb_textSize="14sp"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -95,9 +106,10 @@
             fancy:fb_focusColor="@color/btn_cancel"
             fancy:fb_fontIconResource="&#xf05c;"
             fancy:fb_iconPosition="left"
-            fancy:fb_radius="30dp"
+            fancy:fb_radius="14dp"
             fancy:fb_text="Cancel"
-            fancy:fb_textColor="#FFFFFF" />
+            fancy:fb_textColor="#FFFFFF"
+            fancy:fb_textSize="16sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

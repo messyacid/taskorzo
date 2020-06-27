@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskorzo.data.TaskContract;
 import com.example.taskorzo.data.TaskDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+import com.labo.kaji.fragmentanimations.MoveAnimation;
+import com.labo.kaji.fragmentanimations.SidesAnimation;
 
 import java.util.ArrayList;
 
@@ -70,6 +74,10 @@ String taskTitle, taskDescription;
                 addTaskDialogFragment.show(getFragmentManager(), "New Task Dialog");
             }
         });
+
+
+
+
      return taskView;
     }
 
@@ -94,4 +102,12 @@ String taskTitle, taskDescription;
     }
 
 
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (enter) {
+            return MoveAnimation.create(MoveAnimation.UP, enter, 500);
+        } else {
+            return MoveAnimation.create(MoveAnimation.DOWN, enter, 0);
+        }
+    }
 }
