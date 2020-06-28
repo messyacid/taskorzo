@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskorzo.data.TaskContract;
 import com.example.taskorzo.data.TaskDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.labo.kaji.fragmentanimations.CubeAnimation;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
-import com.labo.kaji.fragmentanimations.SidesAnimation;
-
 import java.util.ArrayList;
 
 public class TaskFragment extends Fragment implements AddTaskDialogFragment.OnTaskSelected {
