@@ -75,18 +75,63 @@
             android:textCursorDrawable="@color/black" />
 
 
+
+
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:padding="4dp"
+            android:text="Make a new Habit?"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <io.ghyeok.stickyswitch.widget.StickySwitch
+            android:id="@+id/switch_habit_or_not"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ss_animationDuration="500"
+            app:ss_animationType="curved"
+            app:ss_iconPadding="8dp"
+            app:ss_iconSize="24dp"
+            app:ss_leftIcon="@drawable/not_habit"
+            app:ss_rightIcon="@drawable/add_habit"
+            app:ss_selectedTextSize="14sp"
+            app:ss_sliderBackgroundColor="#66795CC5"
+            app:ss_switchColor="@color/nav_task"
+            app:ss_textColor="@color/black"
+            app:ss_textSize="14sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/buttonContainerAddTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/buttonAddTask"
