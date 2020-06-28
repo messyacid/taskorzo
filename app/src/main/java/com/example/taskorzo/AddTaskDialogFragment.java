@@ -1,6 +1,8 @@
 package com.example.taskorzo;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +26,11 @@ public class AddTaskDialogFragment extends DialogFragment {
     }
     public OnTaskSelected onTaskSelected;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Nullable
     @Override
@@ -35,9 +42,12 @@ public class AddTaskDialogFragment extends DialogFragment {
        addButton = view.findViewById(R.id.buttonAddTask);
        cancelButton = view.findViewById(R.id.buttonCancelTask);
 
-       addButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
+
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String taskTitle = editTaskTitle.getText().toString().trim();
                 String taskDescription = editTaskDescription.getText().toString().trim();
 
@@ -55,9 +65,6 @@ public class AddTaskDialogFragment extends DialogFragment {
                getDialog().dismiss();
            }
        });
-
-
-
        return view;
     }
 
