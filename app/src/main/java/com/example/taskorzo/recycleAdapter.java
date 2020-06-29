@@ -48,7 +48,7 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
     public int getItemCount() {
       return taskDescription.size();
     }
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView recylerTitleTextView, recylerDescriptionTextView;
         ConstraintLayout taskContainer;
