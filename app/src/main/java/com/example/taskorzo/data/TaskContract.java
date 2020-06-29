@@ -13,8 +13,8 @@ public final class TaskContract {
 
     //Possible values for isHABIT
 
-    public static final int MAKE_HABIT_TRUE = 0;
-    public static final int MAKE_HABIT_FALSE = 1;
+    public static final int MAKE_HABIT_TRUE = 1;
+    public static final int MAKE_HABIT_FALSE = 0;
 
     public static final String CONTENT_AUTHORITY = "com.example.taskorzo";
     public static final String BASE_CONTENT_URI = "content://" + CONTENT_AUTHORITY;

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +23,12 @@ import com.example.taskorzo.data.TaskContract;
 import com.example.taskorzo.data.TaskDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
+
+import java.io.Console;
 import java.util.ArrayList;
 
-public class TaskFragment extends Fragment implements AddTaskDialogFragment.OnTaskSelected {
+
+public class TaskFragment extends Fragment implements AddTaskDialogFragment.OnTaskSelected{
 Cursor cursor;
 RecyclerView recylerAllTasks;
 ArrayList<String> recycleTitle, recycleDescription;
@@ -32,6 +36,9 @@ TaskDbHelper dbHelper;
 recycleAdapter recycleAdapter;
 FloatingActionButton floatingActionButton;
 String taskTitle, taskDescription;
+ContentValues values = new ContentValues();
+Uri newuri;
+int isHabit;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,8 +48,8 @@ String taskTitle, taskDescription;
         floatingActionButton = taskView.findViewById(R.id.addTaskButton);
         recylerAllTasks = (RecyclerView) taskView.findViewById(R.id.recyclerAllTasks);
 
-        recycleTitle = new ArrayList<String>();
-        recycleDescription = new ArrayList<String>();
+        recycleTitle = new ArrayList<>();
+        recycleDescription = new ArrayList<>();
         recycleAdapter = new recycleAdapter(getContext(), recycleTitle, recycleDescription);
 
         recylerAllTasks.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -90,14 +97,21 @@ String taskTitle, taskDescription;
             recycleTitle.add(taskTitle);
             recycleDescription.add(taskDescription);
 
+
             recycleAdapter.notifyDataSetChanged();
 
-            ContentValues values = new ContentValues();
             values.put(TaskContract.COLUMN_TITLE, taskTitle);
             values.put(TaskContract.COLUMN_DESC, taskDescription);
+            values.put(TaskContract.COLUMN_MAKE_HABIT, isHabit);
 
-            Uri newuri = getActivity().getContentResolver().insert(TaskContract.CONTENT_URI, values);
+            newuri = getActivity().getContentResolver().insert(TaskContract.CONTENT_URI, values);
+
         }
+    }
+
+    @Override
+    public void sendHabit(int habitValue) {
+        isHabit = habitValue;
     }
 
 
@@ -109,4 +123,7 @@ String taskTitle, taskDescription;
             return MoveAnimation.create(MoveAnimation.DOWN, enter, 0);
         }
     }
-}
+
+
+
+    }

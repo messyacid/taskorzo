@@ -22,11 +22,6 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                + TaskContract.COLUMN_MAKE_HABIT + " INTEGER NOT NULL DEFAULT 0);";
 
 
-        //INSERT INTO table (column1,column2 ,..)
-        //VALUES( value1,	value2 ,...);
-        String SQL_INSERT_TASK = "INSERT INTO " + TaskContract.TABLE_NAME + " ( "
-                + TaskContract.COLUMN_TITLE + ", " + TaskContract.COLUMN_DESC + " )"
-                + " VALUES (" + "";
 
        db.execSQL(SQL_CREATE_TASK_TABLE);
 
