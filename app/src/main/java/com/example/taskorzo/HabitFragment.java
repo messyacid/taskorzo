@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskorzo.data.TaskContract;
@@ -27,6 +28,7 @@ public class HabitFragment extends Fragment {
     ArrayList<String> habitDescription = new ArrayList<>();
     Cursor cursor;
     TaskDbHelper dbHelper;
+    habitRecylerAdapter recycleAdapter;
 
     @Nullable
     @Override
@@ -35,10 +37,15 @@ public class HabitFragment extends Fragment {
         String[] projection = {TaskContract.COLUMN_ID, TaskContract.COLUMN_TITLE, TaskContract.COLUMN_DESC, TaskContract.COLUMN_MAKE_HABIT};
         String selection = TaskContract.COLUMN_MAKE_HABIT + "=?";
         String[] slectionArgs = new String[] {String.valueOf(TaskContract.MAKE_HABIT_TRUE)};
+        habitRecylerView = habitView.findViewById(R.id.habitRecylerView);
 
         dbHelper = new TaskDbHelper(getContext());
 
         cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, selection, slectionArgs, null);
+
+        recycleAdapter = new habitRecylerAdapter(getContext(), habitTitle, habitDescription);
+        habitRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        habitRecylerView.setAdapter(recycleAdapter);
 
         try {
             int idColumnName = cursor.getColumnIndex(TaskContract.COLUMN_TITLE);
@@ -49,14 +56,9 @@ public class HabitFragment extends Fragment {
                 habitDescription.add(cursor.getString(idColumnDesc));
             }
 
-            Log.i("ArrayBhai", String.valueOf(habitTitle));
-            Log.i("ArrayBhai", String.valueOf(habitDescription));
-
         } finally {
             cursor.close();
         }
-
-
         return habitView;
     }
 

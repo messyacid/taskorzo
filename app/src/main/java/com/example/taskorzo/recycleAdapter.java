@@ -31,6 +31,7 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.recyle_row, parent, false);
         return new MyViewHolder(view);
+
     }
 
     @Override

@@ -8,12 +8,12 @@
     android:layout_marginTop="16dp"
     android:padding="12dp"
     app:layout_goneMarginBottom="24dp"
-    android:id="@+id/task_container"
-    android:background="@drawable/recyler_task_background">
+    android:id="@+id/habit_task_container"
+    android:background="@drawable/recyler_habit_background">
 
 
     <TextView
-        android:id="@+id/recyleTitleTextView"
+        android:id="@+id/habitRecyleTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,12 +25,12 @@
         android:textAlignment="textStart"
         android:textColor="#FFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/recycleDescriptionTextView"
+        app:layout_constraintBottom_toTopOf="@+id/habitRecycleDescriptionTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/recycleDescriptionTextView"
+        android:id="@+id/habitRecycleDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -44,5 +44,5 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyleTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/habitRecyleTitleTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
