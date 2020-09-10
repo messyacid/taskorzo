@@ -1,5 +1,7 @@
 package com.example.taskorzo;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,7 +27,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
 
 import java.io.Console;
+import java.security.Provider;
 import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class TaskFragment extends Fragment implements AddTaskDialogFragment.OnTaskSelected{
@@ -37,6 +42,7 @@ recycleAdapter recycleAdapter;
 FloatingActionButton floatingActionButton;
 String taskTitle, taskDescription;
 ContentValues values = new ContentValues();
+FancyButton markcomplete;
 Uri newuri;
 int isHabit;
     @Nullable
@@ -44,9 +50,9 @@ int isHabit;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View taskView =  inflater.inflate(R.layout.task_fragment,container,  false);
         String[] projection = {TaskContract.COLUMN_ID, TaskContract.COLUMN_TITLE, TaskContract.COLUMN_DESC};
-
         floatingActionButton = taskView.findViewById(R.id.addTaskButton);
         recylerAllTasks = (RecyclerView) taskView.findViewById(R.id.recyclerAllTasks);
+        markcomplete = taskView.findViewById(R.id.mark_complete);
 
         recycleTitle = new ArrayList<>();
         recycleDescription = new ArrayList<>();
@@ -56,7 +62,15 @@ int isHabit;
         recylerAllTasks.setAdapter(recycleAdapter);
         dbHelper = new TaskDbHelper(getContext());
 
-        cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, null, null, null);
+        String myTaskSelection = TaskContract.COLUMN_MAKE_HABIT + "=?";
+        String myTaskSelectionArgs = Integer.toString(TaskContract.MAKE_HABIT_FALSE);
+
+        SharedPreferences habitValueAllowed = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = habitValueAllowed.edit();
+        editor.putInt("habitAmountAllowed", 0);
+        editor.commit();
+
+        cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, myTaskSelection, new String[]{myTaskSelectionArgs}, null);
 
         try {
             int idColumnName = cursor.getColumnIndex(TaskContract.COLUMN_TITLE);
@@ -81,7 +95,23 @@ int isHabit;
             }
         });
 
+        recycleAdapter.setOnItemClickListner(new recycleAdapter.onItemClickListner() {
+            @Override
+            public void onClick(String buttonClicked) {
+                if (!buttonClicked.isEmpty()) {
+                    String selection = TaskContract.COLUMN_TITLE + "=?";
+                    String selectionArgs = buttonClicked;
+                    getActivity().getContentResolver().delete(TaskContract.CONTENT_URI, selection, new String[]{selectionArgs});
+                    int index = recycleTitle.indexOf(buttonClicked);
+                    recycleTitle.remove(index);
+                    recycleDescription.remove(index);
+                    recylerAllTasks.removeViewAt(index);
+                    recycleAdapter.notifyItemRemoved(index);
+                    recycleAdapter.notifyItemRangeChanged(index, recycleTitle.size());
 
+                }
+            }
+        });
 
 
      return taskView;
@@ -93,11 +123,8 @@ int isHabit;
         taskDescription = newTask[1];
 
         if(!taskTitle.isEmpty()) {
-
             recycleTitle.add(taskTitle);
             recycleDescription.add(taskDescription);
-
-
             recycleAdapter.notifyDataSetChanged();
 
             values.put(TaskContract.COLUMN_TITLE, taskTitle);
@@ -111,8 +138,9 @@ int isHabit;
 
     @Override
     public void sendHabit(int habitValue) {
-        isHabit = habitValue;
+                isHabit = habitValue;
     }
+
 
 
     @Override
@@ -123,7 +151,4 @@ int isHabit;
             return MoveAnimation.create(MoveAnimation.DOWN, enter, 0);
         }
     }
-
-
-
-    }
+}

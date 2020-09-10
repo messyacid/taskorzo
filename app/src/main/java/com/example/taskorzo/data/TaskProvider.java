@@ -113,6 +113,7 @@ public class TaskProvider extends ContentProvider {
         }
         return ContentUris.withAppendedId(uri, id);
     }
+    
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         SQLiteDatabase database = taskDbHelper.getWritableDatabase();
