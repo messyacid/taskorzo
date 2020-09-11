@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".individual_habit"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +21,15 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        
-        <provider
-            android:authorities="com.example.taskorzo"
-            android:name=".data.TaskProvider"
-            android:exported="false" />
 
+        <provider
+            android:name=".data.TaskProvider"
+            android:authorities="com.example.taskorzo"
+            android:exported="false" />
+        <provider
+            android:name=".data.HabitProvider"
+            android:authorities="com.example.habitorzo"
+            android:exported="false" />
     </application>
 
 </manifest>

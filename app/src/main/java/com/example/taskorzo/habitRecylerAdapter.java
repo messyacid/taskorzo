@@ -1,9 +1,9 @@
 package com.example.taskorzo;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,10 +32,23 @@ public class habitRecylerAdapter extends RecyclerView.Adapter<habitRecylerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.recylerTitleTextView.setText(String.valueOf(habitTitle.get(position)));
         holder.recylerDescriptionTextView.setText(String.valueOf(habitDescription.get(position)));
-        holder.taskContainer.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), individual_habit.class);
+                String toSendHabitTitle = String.valueOf(habitTitle.get(position));
+                String toSendHabitDescription = String.valueOf(habitDescription.get(position));
+
+                intent.putExtra("TitleTextHabit", toSendHabitTitle);
+                intent.putExtra("DescriptionTextHabit", toSendHabitDescription);
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -46,13 +59,15 @@ public class habitRecylerAdapter extends RecyclerView.Adapter<habitRecylerAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView recylerTitleTextView, recylerDescriptionTextView;
-        ConstraintLayout taskContainer;
+        ConstraintLayout habitContainer;
+
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             recylerTitleTextView = itemView.findViewById(R.id.habitRecyleTitleTextView);
             recylerDescriptionTextView = itemView.findViewById(R.id.habitRecycleDescriptionTextView);
-            taskContainer = itemView.findViewById(R.id.habit_task_container);
+            habitContainer = itemView.findViewById(R.id.habit_task_container);
         }
     }
 }

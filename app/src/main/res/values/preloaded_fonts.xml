@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/allerta</item>
         <item>@font/convergence</item>
+        <item>@font/fira_mono</item>
         <item>@font/roboto_condensed_regular</item>
     </array>
 </resources>

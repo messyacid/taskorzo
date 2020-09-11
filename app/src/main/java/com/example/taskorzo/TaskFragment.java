@@ -62,15 +62,7 @@ int isHabit;
         recylerAllTasks.setAdapter(recycleAdapter);
         dbHelper = new TaskDbHelper(getContext());
 
-        String myTaskSelection = TaskContract.COLUMN_MAKE_HABIT + "=?";
-        String myTaskSelectionArgs = Integer.toString(TaskContract.MAKE_HABIT_FALSE);
-
-        SharedPreferences habitValueAllowed = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = habitValueAllowed.edit();
-        editor.putInt("habitAmountAllowed", 0);
-        editor.commit();
-
-        cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, myTaskSelection, new String[]{myTaskSelectionArgs}, null);
+        cursor = getActivity().getApplicationContext().getContentResolver().query(TaskContract.CONTENT_URI, projection, null, null, null);
 
         try {
             int idColumnName = cursor.getColumnIndex(TaskContract.COLUMN_TITLE);
@@ -129,16 +121,10 @@ int isHabit;
 
             values.put(TaskContract.COLUMN_TITLE, taskTitle);
             values.put(TaskContract.COLUMN_DESC, taskDescription);
-            values.put(TaskContract.COLUMN_MAKE_HABIT, isHabit);
 
             newuri = getActivity().getContentResolver().insert(TaskContract.CONTENT_URI, values);
 
         }
-    }
-
-    @Override
-    public void sendHabit(int habitValue) {
-                isHabit = habitValue;
     }
 
 
