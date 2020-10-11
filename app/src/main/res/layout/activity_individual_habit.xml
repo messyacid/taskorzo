@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".individual_habit"
     android:background="@color/generic_background_color"
-    >
+    android:padding="8dp">
 
 
     <TextView
@@ -43,22 +43,19 @@
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:background="@color/generic_background_color"
+        app:arc_bottom_text_size="18sp"
         app:arc_finished_color="@color/nav_habit"
         app:arc_max="21"
+        app:arc_progress="0"
+        app:arc_stroke_width="12dp"
+        app:arc_suffix_text=" "
+        app:arc_text_color="@color/nav_habit"
         app:arc_unfinished_color="#D8D5D5"
         app:layout_constraintBottom_toTopOf="@+id/addEntryHabit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionText"
-        custom:arc_bottom_text="Habit Progress"
-        custom:arc_progress="4"
-        app:arc_suffix_text="Days"
-        app:arc_suffix_text_size="14sp"
-        app:arc_suffix_text_padding="4dp"
-        app:arc_bottom_text_size="18sp"
-        app:arc_stroke_width="12dp"
-        app:arc_text_color="@color/nav_habit"
-        />
+        custom:arc_bottom_text="Habit Progress"/>
 
     <Button
         android:id="@+id/addEntryHabit"
@@ -67,7 +64,7 @@
         android:layout_marginBottom="32dp"
         android:background="@color/nav_habit"
         android:padding="16dp"
-        android:text="Completed Today"
+        android:text="Add Entry"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

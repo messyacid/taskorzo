@@ -98,7 +98,7 @@
             fancy:fb_fontIconSize="18dp"
             fancy:fb_iconPosition="left"
             fancy:fb_radius="42dp"
-            fancy:fb_text="Add Task"
+            fancy:fb_text="Add Habit"
             fancy:fb_textColor="#FFFFFF"
             fancy:fb_textSize="16sp" />
 

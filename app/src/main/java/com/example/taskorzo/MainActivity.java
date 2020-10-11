@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity  {
                     case R.id.nav_habit:
                         fragment = new HabitFragment();
                         break;
-                    case R.id.nav_skill:
-                        fragment = new SkillFragment();
-                        break;
                 }
 
                 if (fragment != null) {

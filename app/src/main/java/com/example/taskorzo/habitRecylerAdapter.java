@@ -16,10 +16,23 @@ public class habitRecylerAdapter extends RecyclerView.Adapter<habitRecylerAdapte
     Context context;
     ArrayList habitTitle, habitDescription;
 
+
+
     habitRecylerAdapter(Context mcontext, ArrayList mhabitTitle, ArrayList mhabitDescription) {
         context = mcontext;
         habitTitle = mhabitTitle;
         habitDescription = mhabitDescription;
+    }
+
+
+    habitRecylerAdapter.onItemClickListner onItemClickListner;
+
+    public void setOnItemClickListner(habitRecylerAdapter.onItemClickListner onItemClickListner) {
+        this.onItemClickListner = onItemClickListner;
+    }
+
+    public interface onItemClickListner{
+        void onClick(String elementClicked);
     }
 
 
@@ -32,20 +45,14 @@ public class habitRecylerAdapter extends RecyclerView.Adapter<habitRecylerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.recylerTitleTextView.setText(String.valueOf(habitTitle.get(position)));
         holder.recylerDescriptionTextView.setText(String.valueOf(habitDescription.get(position)));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), individual_habit.class);
-                String toSendHabitTitle = String.valueOf(habitTitle.get(position));
-                String toSendHabitDescription = String.valueOf(habitDescription.get(position));
-
-                intent.putExtra("TitleTextHabit", toSendHabitTitle);
-                intent.putExtra("DescriptionTextHabit", toSendHabitDescription);
-                v.getContext().startActivity(intent);
+                onItemClickListner.onClick((String) habitTitle.get(holder.getAdapterPosition()));
             }
         });
 
